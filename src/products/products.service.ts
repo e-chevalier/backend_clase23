@@ -13,31 +13,39 @@ export class ProductsService {
   private readonly products: Product[] = [];
 
   async create(createProductDto: CreateProductDto): Promise<Product> {
+    const maxid = await this.getMaxid();
+    createProductDto.id = maxid + 1;
+
     const createdProduct = new this.productModel(createProductDto);
     return createdProduct.save();
   }
-
-  // create(product: Product) {
-  //   this.products.push(product);
-  // }
 
   async findAll(): Promise<Product[]> {
     return this.productModel.find().exec();
   }
 
-  // findAll(): Product[] {
-  //   return this.products;
-  // }
+  async getProductById(id): Promise<Product> {
+    return this.productModel.findOne({ id: id }).exec();
+  }
 
-  getProductById(id): Product[] {
+  async updateProductById(obj, id): Promise<Product[]> {
     return this.products.filter((p) => p.id == id);
   }
 
-  updateProductById(obj, id): Product[] {
+  async deleteProductById(id): Promise<Product[]> {
     return this.products.filter((p) => p.id == id);
   }
 
-  deleteProductById(id): Product[] {
-    return this.products.filter((p) => p.id == id);
+  async getMaxid() {
+    try {
+      const tmp = await this.productModel
+        .find({}, { id: 1, _id: 0 })
+        .sort({ id: -1 })
+        .limit(1);
+      const res = tmp.length ? tmp[0].id : 0;
+      return res;
+    } catch (error) {
+      throw new Error(error);
+    }
   }
 }

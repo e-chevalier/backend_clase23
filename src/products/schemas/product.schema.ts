@@ -20,7 +20,7 @@ export class Product {
   @Prop({ required: true, max: 100 })
   thumbnail: string;
 
-  @Prop({ required: true, max: 100 })
+  @Prop({ required: true, max: 100, default: Date.now() })
   timestamp: string;
 
   @Prop({ required: true, max: 100 })

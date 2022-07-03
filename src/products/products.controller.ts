@@ -26,7 +26,7 @@ export class ProductsController {
   }
 
   @Get('/:id')
-  async getProductById(@Param('id') id): Promise<Product[]> {
+  async getProductById(@Param('id') id): Promise<Product> {
     return this.productsService.getProductById(id);
   }
 
