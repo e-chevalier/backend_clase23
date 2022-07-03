@@ -34,4 +34,20 @@ export class CartsController {
   async deleteCartById(@Param('id') id): Promise<Cart> {
     return this.cartsService.deleteCartById(id);
   }
+
+  @Delete('/:id/productos/:id_prod')
+  async deleteCarritoProducto (@Param('id') id, @Param('id_prod') id_prod): Promise<Cart> {
+    return this.cartsService.deleteCarritoProducto(id, id_prod);
+  }
+
+  
+
+  @Post('/:id/productos')
+  async postCarritoProducto(
+    @Param('id') id,
+    @Body('id_prod') id_prod,
+    @Body('qty') qty,
+  ): Promise<Cart> {
+    return this.cartsService.postCarritoProducto(id, id_prod, qty);
+  }
 }
