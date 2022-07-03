@@ -2,7 +2,7 @@ import { Model } from 'mongoose';
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Product, ProductDocument } from './schemas/product.schema';
-//import { Product } from 'src/interfaces/product.interface';
+
 import { CreateProductDto } from 'src/dto/create-product.dto';
 
 @Injectable()
@@ -10,7 +10,6 @@ export class ProductsService {
   constructor(
     @InjectModel(Product.name) private productModel: Model<ProductDocument>,
   ) {}
-  private readonly products: Product[] = [];
 
   async create(createProductDto: CreateProductDto): Promise<Product> {
     const maxid = await this.getMaxid();
