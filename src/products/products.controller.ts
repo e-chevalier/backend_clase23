@@ -31,12 +31,12 @@ export class ProductsController {
   }
 
   @Put('/:id')
-  async updateProductById(@Body() obj, @Param('id') id): Promise<Product[]> {
+  async updateProductById(@Body() obj, @Param('id') id): Promise<Product> {
     return this.productsService.updateProductById(obj, id);
   }
 
   @Delete('/:id')
-  async deleteProductById(@Param('id') id): Promise<Product[]> {
+  async deleteProductById(@Param('id') id): Promise<Product> {
     return this.productsService.deleteProductById(id);
   }
 }
