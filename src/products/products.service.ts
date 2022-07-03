@@ -29,15 +29,12 @@ export class ProductsService {
   }
 
   async updateProductById(obj, id): Promise<Product> {
-    //return this.products.filter((p) => p.id == id);
     const updatedProduct = await this.productModel.findOneAndUpdate({ id: id }, obj).exec();
     return updatedProduct;
   }
 
   async deleteProductById(id): Promise<Product> {
-    const deletedProduct = await this.productModel
-      .findByIdAndRemove({ id: id })
-      .exec();
+    const deletedProduct = await this.productModel.findOneAndDelete({'id': id}).exec();
 
     return deletedProduct;
   }
